@@ -1,0 +1,31 @@
+{
+    "name": "vinidpay-a2a-checkout",
+    "version": "0.1.0",
+    "description": "A plugin checkout with VinIDPay A2A.",
+    "cordova": {
+      "id": "vinidpay-a2a-checkout",
+      "platforms": [
+        "ios"
+      ]
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/VinID-lab/vinidpay-app2app-cordova-plugin.git"
+    },
+    "keywords": [
+      "VinIDPay",
+      "Checkout"
+    ],
+    "engines": [
+      {
+        "name": "cordova",
+        "version": ">=3.0.0"
+      }
+    ],
+    "author": "1MG <fs@onemount.com>",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/VinID-lab/vinidpay-app2app-cordova-plugin/issues"
+    },
+    "homepage": "https://github.com/VinID-lab/vinidpay-app2app-cordova-plugin"
+  }

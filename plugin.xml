@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="vinidpay-a2a-checkout" version="0.1.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>vinidpay-a2a-checkout</name>
+    <js-module name="vinidpay-a2a-checkout" src="www/vinidpay-a2a-checkout.js">
+        <clobbers target="cordova.plugins.vinidpay-a2a-checkout" />
+    </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Checkout">
+                <param name="ios-package" value="CDVCheckout"/>
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CDVCheckout.h" target-dir="CDVCheckoutPlugin"/>
+        <source-file src="src/ios/CDVCheckout.m" target-dir="CDVCheckoutPlugin"/>
+
+        <podspec>
+          <config>
+            <source url="https://github.com/CocoaPods/Specs.git"/>
+          </config>
+          <pods use-frameworks="true">
+            <pod name="VinIDPaySDK" spec="~> 1.0" />
+          </pods>
+        </podspec>
+
+        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">          
+          <array>
+            <string>com.vingroup.VinIDApp</string>
+            <string>com.vingroup.VinIDApp.sandbox</string>
+          </array>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+              <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+              </dict>
+              <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                  <string>$PACKAGE_NAME</string>
+                </array>
+              </dict>
+            </array>
+        </config-file>
+    </platform>
+</plugin>
+
