@@ -5,6 +5,19 @@
         <clobbers target="cordova.plugins.vinidpay-a2a-checkout" />
     </js-module>
 
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Checkout">
+                <param name="android-package" value="com.vinid.paysdk.Checkout"/>
+            </feature>
+        </config-file>
+
+        <framework src="src/android/plugin.gradle" custom="true" type="gradleReference"/>
+
+        <source-file src="src/android/Checkout.java" target-dir="src/com/vinid/paysdk" />
+    </platform>
+
     <!-- ios -->
     <platform name="ios">
         <config-file target="config.xml" parent="/*">

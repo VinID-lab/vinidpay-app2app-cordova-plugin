@@ -40,15 +40,12 @@
     [[VinIDPay sharedInstance] payWithOrderId:orderId signature:signature extraData:nil completionHandler:^(NSString *transactionId, VinIDPayStatus status) {
         CDVPluginResult* pluginResult = nil;
         switch (status) {
-            case VinIDPayStatusSuccess: {
-                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:transactionId];
-                
-            }
+            case VinIDPayStatusSuccess:
+                pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
                 break;
                 
-            default: {
+            default: 
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-            }
                 break;
         }
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
