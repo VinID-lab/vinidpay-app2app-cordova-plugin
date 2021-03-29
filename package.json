@@ -5,7 +5,8 @@
     "cordova": {
       "id": "vinidpay-a2a-checkout",
       "platforms": [
-        "ios"
+        "ios",
+        "android"
       ]
     },
     "repository": {
