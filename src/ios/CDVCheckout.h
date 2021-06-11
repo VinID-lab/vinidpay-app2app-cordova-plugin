@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setReturnURLScheme:(CDVInvokedUrlCommand*)command;
 - (void)checkout:(CDVInvokedUrlCommand*)command;
+- (void)setSandboxMode:(CDVInvokedUrlCommand*)command;
 
 @end
 

@@ -2,8 +2,13 @@ var exec = require('cordova/exec');
 
 function CheckoutPlugin(){}
 
+// Set URLScheme to return host app after checkout for iOS Only
 CheckoutPlugin.prototype.setReturnURLScheme = function(scheme, successCallback, errorCallback) {
     exec(successCallback, errorCallback, 'Checkout', 'setReturnURLScheme', [scheme]);
+}
+
+CheckoutPlugin.prototype.setSandboxMode = function(isSandbox, successCallback, errorCallback) {
+    exec(successCallback, errorCallback, 'Checkout', 'setSandboxMode', [isSandbox]);
 }
 
 CheckoutPlugin.prototype.checkout = function(orderId, signature, successCallback, errorCallback) {
