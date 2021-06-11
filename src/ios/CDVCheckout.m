@@ -22,6 +22,18 @@
     [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
+- (void)setSandboxMode:(CDVInvokedUrlCommand*)command {
+    if ([command.arguments count] != 1) {
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
+        [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        return;
+    }
+    NSNumber* mode = [command.arguments objectAtIndex:0];
+    [[VinIDPay sharedInstance] setSandboxMode:mode.boolValue];
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:mode.boolValue];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+}
+
 - (void)checkout:(CDVInvokedUrlCommand*)command {
     if ([command.arguments count] != 2) {
         CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
