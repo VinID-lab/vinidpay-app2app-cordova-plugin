@@ -60,11 +60,11 @@ public class Checkout extends CordovaPlugin {
                     .setVinIDPayParams(param)
                     .setEnvironmentMode(environmentMode)
                     .build();
-            if (VinIDPaySdk.isVinIdAppInstalled(cordova.getActivity())) {
+            if (VinIDPaySdk.Companion.isVinIdAppInstalled(cordova.getActivity())) {
                 cordova.setActivityResultCallback(this);
                 cordova.getActivity().startActivityForResult(sdk.toIntent(), PAYMENT_REQUEST_CODE);
             } else {
-                VinIDPaySdk.openVinIDInstallPage(cordova.getActivity());
+                VinIDPaySdk.Companion.openVinIDInstallPage(cordova.getActivity());
             }
         } catch (Exception e) {
             callbackContext.error("Can not parse options " + args + " " + e.getMessage());
