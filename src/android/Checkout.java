@@ -46,6 +46,7 @@ public class Checkout extends CordovaPlugin {
         } catch (Exception e) {
             callbackContext.error("Can not parse options " + args + " " + e.getMessage());
         }
+        return true;
     }
 
     public boolean openCheckout(JSONArray args, final CallbackContext callbackContext) {
@@ -60,11 +61,11 @@ public class Checkout extends CordovaPlugin {
                     .setVinIDPayParams(param)
                     .setEnvironmentMode(environmentMode)
                     .build();
-            if (VinIDPaySdk.Companion.isVinIdAppInstalled(cordova.getActivity())) {
+            if (VinIDPaySdk.Companion.isVinIdAppInstalled(cordova.getActivity(),environmentMode)) {
                 cordova.setActivityResultCallback(this);
                 cordova.getActivity().startActivityForResult(sdk.toIntent(), PAYMENT_REQUEST_CODE);
             } else {
-                VinIDPaySdk.Companion.openVinIDInstallPage(cordova.getActivity());
+                VinIDPaySdk.Companion.openVinIDInstallPage(cordova.getActivity(),environmentMode);
             }
         } catch (Exception e) {
             callbackContext.error("Can not parse options " + args + " " + e.getMessage());
