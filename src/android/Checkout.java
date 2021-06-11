@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.vinid.paysdk.utils.VinIDPayConstants;
+import com.vinid.paysdk.utils.EnvironmentMode;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
@@ -13,19 +14,38 @@ import org.json.JSONArray;
 
 public class Checkout extends CordovaPlugin {
     private final static int PAYMENT_REQUEST_CODE = 111;
-    private final static String PLUGIN_ACTION = "checkout";
+    private final static String PLUGIN_CHECKOUT = "checkout";
+    private final static String PLUGIN_SET_SANDBOX_MODE = "setSandboxMode";
+
+    private EnvironmentMode environmentMode = EnvironmentMode.PRODUCTION;
 
     private CallbackContext callbackContext;
 
     @Override
     public boolean execute(String action, JSONArray args,
-                           final CallbackContext callbackContext) {
-        if (!action.equals(PLUGIN_ACTION)) {
+            final CallbackContext callbackContext) {
+        if (action.equals(PLUGIN_CHECKOUT)) {
+            this.callbackContext = callbackContext;
+            return openCheckout(args, callbackContext);
+        } else if (action.equals(PLUGIN_SET_SANDBOX_MODE)) {
+            this.callbackContext = callbackContext;
+            return setSandboxMode(args, callbackContext);
+        } else {
             callbackContext.error("\"" + action + "\" is not a recognized action.");
             return false;
         }
-        this.callbackContext = callbackContext;
-        return openCheckout(args, callbackContext);
+    }
+    
+    public boolean setSandboxMode(JSONArray args, final CallbackContext callbackContext) {
+        try {
+            if (args.optBoolean(0, false)) {
+                environmentMode = EnvironmentMode.DEV;
+            } else {
+                environmentMode = EnvironmentMode.PRODUCTION;
+            }
+        } catch (Exception e) {
+            callbackContext.error("Can not parse options " + args + " " + e.getMessage());
+        }
     }
 
     public boolean openCheckout(JSONArray args, final CallbackContext callbackContext) {
@@ -38,9 +58,14 @@ public class Checkout extends CordovaPlugin {
                     .build();
             VinIDPaySdk sdk = new VinIDPaySdk.Builder()
                     .setVinIDPayParams(param)
+                    .setEnvironmentMode(environmentMode)
                     .build();
-            cordova.setActivityResultCallback(this);
-            cordova.getActivity().startActivityForResult(sdk.toIntent(), PAYMENT_REQUEST_CODE);
+            if (VinIDPaySdk.isVinIdAppInstalled(cordova.getActivity())) {
+                cordova.setActivityResultCallback(this);
+                cordova.getActivity().startActivityForResult(sdk.toIntent(), PAYMENT_REQUEST_CODE);
+            } else {
+                VinIDPaySdk.openVinIDInstallPage(cordova.getActivity());
+            }
         } catch (Exception e) {
             callbackContext.error("Can not parse options " + args + " " + e.getMessage());
         }
