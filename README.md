@@ -11,17 +11,22 @@ For OutSystems user, follow the [official guideline](https://success.outsystems.
 ```JSON
 {
     "plugin": {
-        "url": "https://github.com/VinID-lab/vinidpay-app2app-cordova-plugin.git#0.0.2"
+        "url": "https://github.com/VinID-lab/vinidpay-app2app-cordova-plugin.git#0.0.3"
     }
 }
 ```
 
 ## Methods
 - window.plugins.checkoutPlugin.checkout
+- window.plugins.checkoutPlugin.setSandboxMode
 - window.plugins.checkoutPlugin.setReturnURLScheme
 
 ### CheckoutPlugin.checkout
 Request a payment with an `orderId` and `signature`, return the status of the transaction (success/failed) with corresponding callback.
+
+
+### CheckoutPlugin.setSandboxMode
+Enable Sandbox Mode for testing. Default value is `false`, equavalent to PRODUCTION Mode.
 
 ### CheckoutPlugin.setReturnURLScheme
 This function helps [Setup for app switch](https://github.com/VinID-lab/vinidpay-ios-sdk#setup-for-app-switch) for iOS platform. It has been setup properly by default, use it if you want to customize the scheme.
