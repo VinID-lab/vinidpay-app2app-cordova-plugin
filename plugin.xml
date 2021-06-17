@@ -41,7 +41,7 @@
         <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">          
           <array>
             <string>com.vingroup.VinIDApp</string>
-            <string>com.vingroup.VinIDApp.sandbox</string>
+            <string>com.one.oneid.sandbox</string>
           </array>
         </config-file>
 
