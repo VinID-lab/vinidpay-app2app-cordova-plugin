@@ -34,7 +34,7 @@
             <source url="https://cdn.cocoapods.org/"/>
           </config>
           <pods use-frameworks="true">
-            <pod name="VinIDPaySDK" spec="~> 1.0" />
+            <pod name="VinIDPayA2A" spec="~> 1.0" />
           </pods>
         </podspec>
 
