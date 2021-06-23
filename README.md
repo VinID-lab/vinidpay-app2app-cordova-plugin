@@ -11,7 +11,7 @@ For OutSystems user, follow the [official guideline](https://success.outsystems.
 ```JSON
 {
     "plugin": {
-        "url": "https://github.com/VinID-lab/vinidpay-app2app-cordova-plugin.git#0.0.4"
+        "url": "https://github.com/VinID-lab/vinidpay-app2app-cordova-plugin.git#0.0.5"
     }
 }
 ```
